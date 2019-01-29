@@ -9,9 +9,8 @@ public class Grouping
 		static int bigGroup;
 		static int groupSize;
 		static int smallGroup;
+		static String[] groups;
 		static ArrayList<Student> students = new ArrayList<Student>();
-		static ArrayList<String> groups = new ArrayList<String>();
-		static ArrayList<String[] > groupsTest = new ArrayList<String[]>();
 		
 		public static void importStudents() throws FileNotFoundException
 		{
@@ -24,54 +23,42 @@ public class Grouping
 				}
 		}
 		
-//		public static void findNumberOfGroups()
-//		{
-//			System.out.println("How many groups would you like to make?");
-//			numberOfGroups = userInt.nextInt();
-//			int remainder;
-//			for(int i =0;i < students.size(); i++)
-//				{
-//					remainder = (students.get(i).getSpot() % numberOfGroups);
-//					//System.out.println(remainder);
-//					if(remainder == 1)
-//						{
-//							groups.add(students.get(i).getName());
-//							//group[i]= students.get(i).getName();
-//						}
-//					else if(remainder == 2);
-//				}
-//			System.out.println(groups.size());
-//		}
-		public static void printStudents()
-		{
-//			for(Student s:students)
-//				{
-//					System.out.println(s.getName() + "" + s.getSpot());
-//				}
-			for(String s:groups)
-				{
-					System.out.println(s);
-				}
-		}
 		public static void findNumberOfGroups()
 		{
 			System.out.println("How many groups would you like to make?");
 			numberOfGroups = userInt.nextInt();
 			groupSize = students.size()/numberOfGroups;
-			remainder = students.size() - (numberOfGroups*groupSize);
-			bigGroup = remainder;
-			smallGroup = numberOfGroups-remainder;
-			
-			//String[] group = new String[students.size()/numberOfGroups];
-
-			for(int i =0;i < students.size(); i++)
+			remainder = students.size() - (groupSize*numberOfGroups);
+			bigGroup = remainder+groupSize;
+			groups = new String[numberOfGroups];
+			int counter =0;
+			//System.out.println(groupSize + " " + remainder);
+			for(int r = 0; r < numberOfGroups; r++)
 				{
-					int remainder = (students.get(i).getSpot() % numberOfGroups);
-					//System.out.println(remainder);
-					if(remainder == 1)
+					groups[r] = "";
+					for(int c = 0; c < groupSize; c++)
 						{
-							//group[i] = students.get(i).getName();
+							if(counter < 22)
+								{
+									groups[r] += students.get(counter).getName();
+								}
+							counter++;
 						}
+					
+				}
+			
+			//System.out.println(groups[4]);
+			//System.out.println(groups[5]);
+		}
+		public static void printStudents()
+		{
+			for(Student s:students)
+				{
+					System.out.println(s.getName() + "" + s.getSpot());
+				}
+			for(int i = 0; i < groups.length;i++)
+				{
+					System.out.println(groups[i]);
 				}
 		}
 	}
